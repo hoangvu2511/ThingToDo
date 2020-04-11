@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  text size  -->
+    <dimen name="descriptionTextSize">14sp</dimen>
+    <dimen name="defaultTextSize">16sp</dimen>
+    <dimen name="headerTextSize">24sp</dimen>
+
+    <!--  img size  -->
+    <dimen name="img_width">50dp</dimen>
+    <dimen name="img_height">100dp</dimen>
+
+
+    <!--  layout  -->
+    <dimen name="margin_0dp">0dp</dimen>
+    <dimen name="margin_4dp">4dp</dimen>
+    <dimen name="margin_8dp">8dp</dimen>
+    <dimen name="margin_12dp">12dp</dimen>
+    <dimen name="margin_16dp">16dp</dimen>
+    <dimen name="margin_24dp">24dp</dimen>
+    <dimen name="margin_32dp">32dp</dimen>
+    <dimen name="margin_40dp">40dp</dimen>
+    <dimen name="margin_48dp">48dp</dimen>
+</resources>

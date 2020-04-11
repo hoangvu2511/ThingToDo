@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Thing To Do</string>
+    <string name="tasks">Tasks</string>
+    <string name="calendar">Calendar</string>
+    <string name="settings">Settings</string>
+    <string name="item_count">%s Items</string>
+</resources>

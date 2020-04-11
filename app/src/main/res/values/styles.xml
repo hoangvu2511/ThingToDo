@@ -1,0 +1,30 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimaryDark">@color/mainColor</item>
+    </style>
+
+    <style name="normalText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/defaultTextSize</item>
+        <item name="android:textColor">@color/textDefaultColor</item>
+        <item name="android:layout_margin">@dimen/margin_8dp</item>
+    </style>
+
+    <style name="normalText.descriptionText">
+        <item name="android:textSize">@dimen/defaultTextSize</item>
+        <item name="android:textColor">@color/textDescription</item>
+    </style>
+
+    <style name="normalText.title">
+        <item name="android:textColor">@color/textSelectedColor</item>
+    </style>
+
+    <style name="normalText.header">
+        <item name="android:textSize">@dimen/headerTextSize</item>
+    </style>
+
+</resources>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="type"
+            type="com.vunguyenhoang.core.model.TaskListType" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/margin_8dp"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="@color/mainColor"
+            android:orientation="vertical"
+            android:paddingVertical="@dimen/margin_24dp"
+            android:paddingHorizontal="@dimen/margin_48dp"
+            tools:ignore="UselessParent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivImgType"
+                android:layout_width="@dimen/img_width"
+                android:layout_height="@dimen/img_height" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvItemTitleType"
+                style="@style/normalText.title"
+                android:layout_marginBottom="@dimen/margin_0dp"
+                android:text="@{type.title.value.toString()}"
+                tools:text="Add list" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvItemCount"
+                style="@style/normalText.descriptionText"
+                android:text="@{type.counts == null ? `` : @string/item_count(type.counts)}"
+                android:layout_marginTop="@dimen/margin_0dp"
+                tools:text="9 items" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>
