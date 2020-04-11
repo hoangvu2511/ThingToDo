@@ -3,20 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.thingtodo.viewmodel.MainActivityViewModel" />
+
+        <variable
+            name="activity"
+            type="com.example.thingtodo.MainActivity" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/mainColor"
         android:orientation="vertical">
 
         <include
+            android:id="@+id/tool_bar"
             layout="@layout/tool_bar"
-            app:header="@={viewModel.header}"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:header="@={viewModel.header}"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainer"
@@ -25,7 +34,20 @@
             android:layout_weight="1"
             android:background="@color/fragmentBackGroundColor"
             app:layout_constraintBottom_toTopOf="@id/bottom_nav"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/tool_bar" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_new_task"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_24dp"
+            android:layout_marginBottom="@dimen/margin_24dp"
+            android:backgroundTint="@color/textSelectedColor"
+            android:onClick="@{activity.onClick}"
+            android:src="@drawable/ic_add_list"
+            app:backgroundTint="@color/textSelectedColor"
+            app:layout_constraintBottom_toTopOf="@id/bottom_nav"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_nav"
@@ -36,5 +58,5 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:menu="@menu/menu_bottom" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
