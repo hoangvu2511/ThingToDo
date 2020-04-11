@@ -1,6 +1,10 @@
 package com.vunguyenhoang.core.model
 
-enum class TypeTask(val value: String) {
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+enum class TypeTask(val value: String) : Parcelable {
     WORK("Work"),
     PERSONAL("Personal"),
     ALL("All Tasks"),

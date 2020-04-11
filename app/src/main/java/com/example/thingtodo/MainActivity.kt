@@ -4,9 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import androidx.navigation.NavController
-import androidx.navigation.fragment.FragmentNavigator
 import com.example.thingtodo.databinding.ActivityMainBinding
 import com.example.thingtodo.ext.setupWithNavController
 import com.example.thingtodo.viewmodel.MainActivityViewModel
@@ -40,10 +38,5 @@ class MainActivity : AppCompatActivity() {
             containerId = R.id.fragmentContainer,
             intent = intent
         )
-
-        currentNavController?.observe(this, Observer {
-            viewModel.updateHeader((it.currentDestination as? FragmentNavigator.Destination)?.className ?: return@Observer)
-        })
-
     }
 }
