@@ -9,6 +9,8 @@
     <dimen name="img_width">50dp</dimen>
     <dimen name="img_height">100dp</dimen>
 
+    <!--  corner  -->
+    <dimen name="corner_radius">10dp</dimen>
 
     <!--  layout  -->
     <dimen name="margin_0dp">0dp</dimen>

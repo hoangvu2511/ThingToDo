@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import com.vunguyenhoang.core.Result
 import com.vunguyenhoang.core.database.source.TaskSource
 import com.vunguyenhoang.core.model.Task
-import com.vunguyenhoang.core.model.TaskListType
 
 class TaskRepositoryIml(private val source: TaskSource) : TaskRepository {
 
@@ -12,4 +11,7 @@ class TaskRepositoryIml(private val source: TaskSource) : TaskRepository {
         return source.getAllTasks()
     }
 
+    override fun addTask(task: Task): Long {
+        return source.addTask(task)
+    }
 }

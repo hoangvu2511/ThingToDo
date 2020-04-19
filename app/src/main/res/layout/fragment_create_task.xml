@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.vunguyenhoang.core.model.Task" />
+
+        <import type="android.text.TextUtils" />
+
+        <variable
+            name="viewModel"
+            type="com.example.thingtodo.viewmodel.TaskViewModel" />
+
+        <variable
+            name="fragment"
+            type="com.example.thingtodo.feature.CreateTaskFragment" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/rootCoordinator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/rootBottomSheet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/fragmentBackGroundColor"
+            android:paddingHorizontal="@dimen/margin_8dp"
+            android:paddingVertical="@dimen/margin_24dp"
+            app:layout_behavior="@string/bottom_sheet_behavior">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivTop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_create_top" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/titleCreate"
+                style="@style/normalText.header"
+                android:layout_margin="@dimen/margin_0dp"
+                android:layout_marginTop="@dimen/margin_8dp"
+                android:text="@string/create_new_task"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivTop" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edtTaskName"
+                style="@style/round_corner.editText"
+                android:layout_width="@dimen/margin_0dp"
+                android:layout_marginTop="@dimen/margin_8dp"
+                android:hint="@string/task_name"
+                android:padding="@dimen/margin_8dp"
+                android:singleLine="true"
+                android:text="@={viewModel.titleTask}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/titleCreate"
+                app:layout_constraintTop_toBottomOf="@id/titleCreate" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edtTaskDescription"
+                style="@style/round_corner.editText"
+                android:layout_width="@dimen/margin_0dp"
+                android:layout_marginTop="@dimen/margin_8dp"
+                android:gravity="top"
+                android:hint="@string/task_note"
+                android:lines="5"
+                android:padding="@dimen/margin_8dp"
+                android:singleLine="false"
+                android:text="@={viewModel.descTask}"
+                app:layout_constraintEnd_toEndOf="@id/edtTaskName"
+                app:layout_constraintStart_toStartOf="@id/edtTaskName"
+                app:layout_constraintTop_toBottomOf="@id/edtTaskName" />
+
+            <include
+                android:id="@+id/item_priority"
+                layout="@layout/item_priority"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8dp"
+                app:layout_constraintStart_toStartOf="@id/edtTaskDescription"
+                app:layout_constraintTop_toBottomOf="@id/edtTaskDescription" />
+
+            <include
+                android:id="@+id/item_data_time"
+                layout="@layout/item_calendar"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@id/item_priority"
+                app:layout_constraintEnd_toStartOf="@id/item_notification"
+                app:layout_constraintStart_toEndOf="@id/item_priority"
+                app:layout_constraintTop_toTopOf="@id/item_priority" />
+
+            <include
+                android:id="@+id/item_notification"
+                layout="@layout/item_notification"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@id/item_priority"
+                app:layout_constraintEnd_toEndOf="@id/edtTaskDescription"
+                app:layout_constraintTop_toTopOf="@id/item_priority" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/titleAttachFile"
+                style="@style/normalText"
+                android:layout_marginTop="@dimen/margin_8dp"
+                android:text="@string/attachment_file"
+                app:layout_constraintStart_toStartOf="@id/item_priority"
+                app:layout_constraintTop_toBottomOf="@id/item_priority" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvAddFile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8dp"
+                android:background="@drawable/ic_bg_add_file"
+                android:gravity="center"
+                android:text="@string/tap_to_add_files"
+                android:textAlignment="center"
+                android:textColor="@color/textHint"
+                app:layout_constraintTop_toBottomOf="@id/titleAttachFile" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/btnCreateTask"
+                style="@style/normalText"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/margin_8dp"
+                android:background="@drawable/bg_btn_create_task"
+                android:enabled="@{!TextUtils.isEmpty(viewModel.titleTask) &amp;&amp; !TextUtils.isEmpty(viewModel.descTask)}"
+                android:onClick="@{(view) -> viewModel.createTask((Task)null)}"
+                android:padding="@dimen/margin_12dp"
+                android:text="@string/create_task"
+                android:textAlignment="center"
+                android:textColor="@color/text_color_enable"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvAddFile" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

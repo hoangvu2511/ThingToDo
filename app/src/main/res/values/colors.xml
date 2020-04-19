@@ -8,4 +8,6 @@
     <color name="textSelectedColor">#76DC58</color>
     <color name="textDefaultColor">#ffffff</color>
     <color name="textDescription">#707070</color>
+    <color name="textHint">#80FFFFFF</color>
+    <color name="colorBlack">#000</color>
 </resources>

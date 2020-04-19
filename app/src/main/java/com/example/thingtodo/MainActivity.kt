@@ -2,20 +2,22 @@ package com.example.thingtodo
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
 import com.example.thingtodo.databinding.ActivityMainBinding
 import com.example.thingtodo.ext.setupWithNavController
+import com.example.thingtodo.feature.CreateTaskFragment
 import com.example.thingtodo.viewmodel.MainActivityViewModel
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
     private var currentNavController: LiveData<NavController>? = null
     private lateinit var binding: ActivityMainBinding
     private val viewModel : MainActivityViewModel by viewModel()
+    private val createTaskFragment = inject<CreateTaskFragment>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,7 +50,10 @@ class MainActivity : AppCompatActivity() {
     fun onClick(v: View) {
         when (v.id) {
             R.id.fab_new_task -> {
-                Toast.makeText(this, "New Task", Toast.LENGTH_SHORT).show()
+                createTaskFragment.value.show(
+                    supportFragmentManager,
+                    CreateTaskFragment::class.simpleName
+                )
             }
         }
     }

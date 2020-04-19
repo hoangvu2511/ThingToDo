@@ -6,4 +6,6 @@ import com.vunguyenhoang.core.model.Task
 
 interface TaskRepository {
     fun getTasks(): LiveData<Result<List<Task>>>
+
+    fun addTask(task: Task): Long
 }

@@ -2,6 +2,7 @@ package com.vunguyenhoang.core.database.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
+import androidx.room.Insert
 import androidx.room.Query
 import com.vunguyenhoang.core.model.Task
 
@@ -11,4 +12,6 @@ interface TaskDao {
     @Query("Select * from task")
     fun getAllTasks(): LiveData<List<Task>>
 
+    @Insert
+    fun addTask(task: Task): Long
 }
