@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.example.thingtodo.viewmodel.TaskViewModel" />
+
+        <variable
+            name="item"
+            type="com.vunguyenhoang.core.model.Task" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/mainColor"
+        android:padding="@dimen/margin_8dp">
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/cbTask"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="@={item.isCheck}"
+            android:visibility="@{item.isShowCheck ? View.VISIBLE : View.GONE}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/titleTask"
+            style="@style/normalText.header"
+            android:text="@{item.title}"
+            app:layout_constraintStart_toEndOf="@id/cbTask"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Google Project" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/normalText.descriptionText"
+            android:layout_marginTop="@dimen/margin_8dp"
+            android:text="@{item.description}"
+            app:layout_constraintStart_toStartOf="@id/titleTask"
+            app:layout_constraintTop_toBottomOf="@id/titleTask" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            style="@style/normalText"
+            android:background="@color/fragmentBackGroundColor"
+            android:onClick="@{() -> viewModel.deleteTask(item)}"
+            android:text="@string/delete"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/titleTask" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -10,6 +10,7 @@ import com.example.thingtodo.databinding.ActivityMainBinding
 import com.example.thingtodo.ext.setupWithNavController
 import com.example.thingtodo.feature.CreateTaskFragment
 import com.example.thingtodo.viewmodel.MainActivityViewModel
+import com.example.thingtodo.viewmodel.TaskViewModel
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -17,6 +18,7 @@ class MainActivity : AppCompatActivity() {
     private var currentNavController: LiveData<NavController>? = null
     private lateinit var binding: ActivityMainBinding
     private val viewModel : MainActivityViewModel by viewModel()
+    private val taskViewModel: TaskViewModel by viewModel()
     private val createTaskFragment = inject<CreateTaskFragment>()
 
 
@@ -26,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         binding.apply {
             viewModel = this@MainActivity.viewModel
             activity = this@MainActivity
+            taskVewModel = this@MainActivity.taskViewModel
         }
         setUpBottomNav()
     }
@@ -54,6 +57,9 @@ class MainActivity : AppCompatActivity() {
                     supportFragmentManager,
                     CreateTaskFragment::class.simpleName
                 )
+            }
+            R.id.delete_tasks -> {
+                taskViewModel.deleteListTask()
             }
         }
     }

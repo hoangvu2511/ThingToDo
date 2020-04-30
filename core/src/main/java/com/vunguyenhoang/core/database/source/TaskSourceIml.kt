@@ -2,6 +2,8 @@ package com.vunguyenhoang.core.database.source
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 import com.vunguyenhoang.core.Result
 import com.vunguyenhoang.core.database.dao.TaskDao
 import com.vunguyenhoang.core.model.Task
@@ -17,5 +19,23 @@ class TaskSourceIml(private val taskDao: TaskDao) : TaskSource {
 
     override fun addTask(task: Task): Long = runBlocking(Dispatchers.IO) {
         taskDao.addTask(task)
+    }
+
+    override fun loadPagedList(): LiveData<PagedList<Task>> {
+        val config = PagedList.Config.Builder()
+            .setPageSize(20)
+            .build()
+        return LivePagedListBuilder(
+            taskDao.loadPagedTask(),
+            config
+        ).build()
+    }
+
+    override fun deleteTask(task: Task) = runBlocking(Dispatchers.IO) {
+        taskDao.deleteTask(task)
+    }
+
+    override fun deleteListTask(listTask: List<Task>) = runBlocking(Dispatchers.IO) {
+        taskDao.deleteListTask(listTask)
     }
 }

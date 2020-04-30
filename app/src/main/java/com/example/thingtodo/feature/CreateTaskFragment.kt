@@ -19,7 +19,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class CreateTaskFragment : BottomSheetDialogFragment(), View.OnClickListener {
 
     private lateinit var binding: FragmentCreateTaskBinding
-    val taskViewModel: TaskViewModel by viewModel()
+    private val taskViewModel: TaskViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,

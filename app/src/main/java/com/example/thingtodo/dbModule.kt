@@ -22,9 +22,9 @@ val dbModule = module {
 
     single { CreateTaskFragment() }
 
-    single<TaskSource> { TaskSourceIml(get()) }
+    factory<TaskSource> { TaskSourceIml(get()) }
 
-    single<TaskRepository> { TaskRepositoryIml(get()) }
+    factory<TaskRepository> { TaskRepositoryIml(get()) }
 
     single<TaskTypeRepo> { TaskTypeRepoIml(get()) }
 

@@ -1,36 +1,40 @@
 package com.example.thingtodo.feature.task
 
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.Observer
 import com.example.thingtodo.R
 import com.example.thingtodo.base.BaseFragment
 import com.example.thingtodo.databinding.FragmentMyTasksBinding
 import com.example.thingtodo.ext.KEY_ARGUMENT
 import com.example.thingtodo.viewmodel.TaskViewModel
-import com.google.gson.Gson
 import com.vunguyenhoang.core.model.TypeTask
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class MyTasksFragment : BaseFragment<FragmentMyTasksBinding>() {
 
     override var layoutIdRes: Int = R.layout.fragment_my_tasks
     private var type: TypeTask? = null
-    private val taskViewModel: TaskViewModel by viewModel()
+    private val taskViewModel: TaskViewModel by sharedViewModel()
+    private lateinit var adapter: TaskAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         type = arguments?.get(KEY_ARGUMENT) as? TypeTask
-        taskViewModel.loadTasks()
+        taskViewModel.loadPagedList()
+    }
+
+    override fun init() {
+        adapter = TaskAdapter(taskViewModel)
+        binding.rvTasks.adapter = this.adapter
     }
 
     override fun setUpHeader() {
         mainActivityViewModel.updateHeader(type?.value ?: TypeTask.ALL.value)
     }
 
-    override fun setUpViewModel() {
-        taskViewModel.items.observe(this, Observer {
-            Log.d("ABCD", Gson().toJson(it))
+    override fun setUpViewModelOnce() {
+        taskViewModel.pagedList.observe(this, Observer {
+            adapter.submitList(it)
         })
     }
 
