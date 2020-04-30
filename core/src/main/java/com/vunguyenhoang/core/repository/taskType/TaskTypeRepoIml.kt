@@ -2,17 +2,17 @@ package com.vunguyenhoang.core.repository.taskType
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
+import com.vunguyenhoang.core.DbResult
 import com.vunguyenhoang.core.database.dao.TaskTypeDao
 import com.vunguyenhoang.core.model.TaskListType
+import com.vunguyenhoang.core.model.TypeTask
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import com.vunguyenhoang.core.Result
-import com.vunguyenhoang.core.model.TypeTask
 
 
 class TaskTypeRepoIml(private val taskTypeDao: TaskTypeDao) : TaskTypeRepo {
 
-    override suspend fun getAllTaskType(): LiveData<Result<List<TaskListType>>> =
+    override suspend fun getAllTaskType(): LiveData<DbResult<List<TaskListType>>> =
         Transformations.map(taskTypeDao.getAllTaskType()) {
             val result = arrayListOf<TaskListType>()
             result.addAll(it)
@@ -35,7 +35,7 @@ class TaskTypeRepoIml(private val taskTypeDao: TaskTypeDao) : TaskTypeRepo {
                 ))
                 add(TaskListType())
             }
-            return@map Result.Success(result.toList())
+            return@map DbResult.Success(result.toList())
         }
 
     override suspend fun addTaskType(taskListType: TaskListType)  = withContext(Dispatchers.IO){

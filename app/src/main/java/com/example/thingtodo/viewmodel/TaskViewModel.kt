@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagedList
-import com.vunguyenhoang.core.Result
+import com.vunguyenhoang.core.DbResult
 import com.vunguyenhoang.core.model.Task
 import com.vunguyenhoang.core.model.TypeTask
 import com.vunguyenhoang.core.repository.TaskRepository
@@ -24,8 +24,8 @@ class TaskViewModel(private val repo: TaskRepository) : ViewModel() {
         loadMoreTask.value = true
         items.addSource(repo.getTasks()) {
             when (it) {
-                is Result.Success -> items.value = it.data
-                is Result.Error -> error.value = it.exception
+                is DbResult.Success -> items.value = it.data
+                is DbResult.Error -> error.value = it.exception
             }
         }
     }

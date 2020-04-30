@@ -3,7 +3,7 @@ package com.example.thingtodo.viewmodel
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.vunguyenhoang.core.Result
+import com.vunguyenhoang.core.DbResult
 import com.vunguyenhoang.core.model.TaskListType
 import com.vunguyenhoang.core.repository.taskType.TaskTypeRepo
 import kotlinx.coroutines.launch
@@ -16,13 +16,13 @@ class TaskTypeViewModel(private val repo: TaskTypeRepo) : ViewModel(){
         viewModelScope.launch {
             taskListType.addSource(repo.getAllTaskType()){
                 when(it){
-                    is Result.Success -> {
+                    is DbResult.Success -> {
                         taskListType.value = it.data
                     }
-                    is Result.Error -> {
+                    is DbResult.Error -> {
 
                     }
-                    is Result.Loading -> {
+                    is DbResult.Loading -> {
 
                     }
                 }

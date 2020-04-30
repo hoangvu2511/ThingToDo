@@ -2,13 +2,13 @@ package com.vunguyenhoang.core.repository
 
 import androidx.lifecycle.LiveData
 import androidx.paging.PagedList
-import com.vunguyenhoang.core.Result
+import com.vunguyenhoang.core.DbResult
 import com.vunguyenhoang.core.database.source.TaskSource
 import com.vunguyenhoang.core.model.Task
 
 class TaskRepositoryIml(private val source: TaskSource) : TaskRepository {
 
-    override fun getTasks(): LiveData<Result<List<Task>>> {
+    override fun getTasks(): LiveData<DbResult<List<Task>>> {
         return source.getAllTasks()
     }
 
