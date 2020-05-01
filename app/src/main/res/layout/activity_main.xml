@@ -72,6 +72,7 @@
             android:layout_height="wrap_content"
             app:itemIconTint="@color/menu_selector"
             app:itemTextColor="@color/menu_selector"
+            android:background="@color/mainColor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:menu="@menu/menu_bottom" />
 
