@@ -5,8 +5,6 @@ import com.example.thingtodo.viewmodel.MainActivityViewModel
 import com.example.thingtodo.viewmodel.TaskTypeViewModel
 import com.example.thingtodo.viewmodel.TaskViewModel
 import com.vunguyenhoang.core.database.TodoDb
-import com.vunguyenhoang.core.database.source.TaskSource
-import com.vunguyenhoang.core.database.source.TaskSourceIml
 import com.vunguyenhoang.core.repository.TaskRepository
 import com.vunguyenhoang.core.repository.TaskRepositoryIml
 import com.vunguyenhoang.core.repository.taskType.TaskTypeRepo
@@ -21,8 +19,6 @@ val dbModule = module {
     single { get<TodoDb>().taskTypeDao() }
 
     single { CreateTaskFragment() }
-
-    factory<TaskSource> { TaskSourceIml(get()) }
 
     factory<TaskRepository> { TaskRepositoryIml(get()) }
 

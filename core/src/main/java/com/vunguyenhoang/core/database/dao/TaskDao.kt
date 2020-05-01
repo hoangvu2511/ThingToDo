@@ -15,14 +15,14 @@ interface TaskDao {
     fun getAllTasks(): LiveData<List<Task>>
 
     @Insert
-    fun addTask(task: Task): Long
+    suspend fun addTask(task: Task): Long
 
     @Query("select * from task")
     fun loadPagedTask(): DataSource.Factory<Int, Task>
 
     @Delete
-    fun deleteTask(task: Task)
+    suspend fun deleteTask(task: Task)
 
     @Delete
-    fun deleteListTask(task: List<Task>)
+    suspend fun deleteListTask(task: List<Task>)
 }

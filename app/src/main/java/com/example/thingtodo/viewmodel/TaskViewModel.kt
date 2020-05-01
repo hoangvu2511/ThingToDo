@@ -2,11 +2,9 @@ package com.example.thingtodo.viewmodel
 
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagedList
-import com.vunguyenhoang.core.DbResult
 import com.vunguyenhoang.core.model.Task
 import com.vunguyenhoang.core.model.TypeTask
 import com.vunguyenhoang.core.repository.TaskRepository
@@ -14,21 +12,6 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 class TaskViewModel(private val repo: TaskRepository) : ViewModel() {
-
-    private val loadMoreTask = MutableLiveData<Boolean>()
-
-    val items = MediatorLiveData<List<Task>>()
-    val error = MutableLiveData<Exception>()
-
-    fun loadTasks() {
-        loadMoreTask.value = true
-        items.addSource(repo.getTasks()) {
-            when (it) {
-                is DbResult.Success -> items.value = it.data
-                is DbResult.Error -> error.value = it.exception
-            }
-        }
-    }
 
     val pagedList = MediatorLiveData<PagedList<Task>>()
 
