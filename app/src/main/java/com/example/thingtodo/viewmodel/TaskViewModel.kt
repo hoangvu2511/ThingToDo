@@ -24,8 +24,11 @@ class TaskViewModel(private val repo: TaskRepository) : ViewModel() {
     }
 
 
-    val titleTask = ObservableField("")
+    var titleTask = ObservableField("")
+
     val descTask = ObservableField("")
+
+    val needNotification = ObservableField(false)
 
     fun createTask(task: Task? = null) {
         val newTask = task ?: Task(

@@ -103,6 +103,7 @@
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="@id/item_priority"
                 app:layout_constraintEnd_toEndOf="@id/edtTaskDescription"
+                app:clicked="@{viewModel.needNotification}"
                 app:layout_constraintTop_toTopOf="@id/item_priority" />
 
 

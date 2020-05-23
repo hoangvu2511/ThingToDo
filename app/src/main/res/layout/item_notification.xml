@@ -1,19 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="@drawable/bg_rounded_corner"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:padding="@dimen/margin_24dp">
+<layout>
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <data>
+
+        <variable
+            name="clicked"
+            type="androidx.databinding.ObservableField&lt;Boolean>" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_notification" />
+        android:background="@drawable/bg_rounded_corner"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/margin_24dp">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        style="@style/normalText"
-        android:layout_margin="@dimen/margin_0dp"
-        android:text="@string/notification" />
-</LinearLayout>
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/noti_bg_selector"
+            android:checked="@={clicked}" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/normalText"
+            android:layout_margin="@dimen/margin_0dp"
+            android:text="@string/notification"
+            android:textColor="@{clicked.booleanValue() == true ? @color/textSelectedColor : @color/textDefaultColor}" />
+    </LinearLayout>
+</layout>

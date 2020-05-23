@@ -1,6 +1,6 @@
 package com.example.thingtodo.feature
 
-
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,11 +15,13 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.jetbrains.anko.find
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.*
 
 class CreateTaskFragment : BottomSheetDialogFragment(), View.OnClickListener {
 
     private lateinit var binding: FragmentCreateTaskBinding
     private val taskViewModel: TaskViewModel by viewModel()
+    private lateinit var calendar: Calendar
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,8 +37,20 @@ class CreateTaskFragment : BottomSheetDialogFragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.item_data_time -> {
-            }
-            R.id.item_notification -> {
+                DatePickerDialog(
+                    requireContext(),
+                    DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+                        calendar.set(year, month, dayOfMonth)
+                        binding.itemDataTime.tvDate.text =
+                            getString(R.string.date_create_task, dayOfMonth, month, year)
+                    },
+                    calendar.get(Calendar.YEAR),
+                    calendar.get(Calendar.MONTH),
+                    calendar.get(Calendar.DATE)
+                ).apply {
+                    datePicker.minDate = System.currentTimeMillis()
+                    show()
+                }
             }
             R.id.item_priority -> {
             }
@@ -56,12 +70,12 @@ class CreateTaskFragment : BottomSheetDialogFragment(), View.OnClickListener {
             root.parent.requestLayout()
         }
 
-        binding.itemDataTime.setOnClickListener(this)
-        binding.itemNotification.setOnClickListener(this)
+        binding.itemDataTime.root.setOnClickListener(this)
         binding.itemPriority.setOnClickListener(this)
     }
 
     private fun init() {
         binding.viewModel = taskViewModel
+        calendar = Calendar.getInstance()
     }
 }
