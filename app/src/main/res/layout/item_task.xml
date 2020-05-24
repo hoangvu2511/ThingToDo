@@ -20,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/mainColor"
+        android:layout_marginBottom="@dimen/margin_8dp"
         android:padding="@dimen/margin_8dp">
 
         <androidx.appcompat.widget.AppCompatCheckBox
@@ -40,6 +41,7 @@
             tools:text="Google Project" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/descTask"
             style="@style/normalText.descriptionText"
             android:layout_marginTop="@dimen/margin_8dp"
             android:text="@{item.description}"

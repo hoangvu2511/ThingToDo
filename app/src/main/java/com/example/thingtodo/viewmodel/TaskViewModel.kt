@@ -6,10 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagedList
 import com.vunguyenhoang.core.model.Task
-import com.vunguyenhoang.core.model.TypeTask
 import com.vunguyenhoang.core.repository.TaskRepository
 import kotlinx.coroutines.launch
-import java.util.*
 
 class TaskViewModel(private val repo: TaskRepository) : ViewModel() {
 
@@ -21,25 +19,6 @@ class TaskViewModel(private val repo: TaskRepository) : ViewModel() {
                 pagedList.value = it
             }
         }
-    }
-
-
-    var titleTask = ObservableField("")
-
-    val descTask = ObservableField("")
-
-    val needNotification = ObservableField(false)
-
-    fun createTask(task: Task? = null) {
-        val newTask = task ?: Task(
-            title = titleTask.get(),
-            description = descTask.get(),
-            time = Calendar.getInstance().timeInMillis,
-            type = TypeTask.ALL
-        )
-        repo.addTask(newTask)
-        titleTask.set("")
-        descTask.set("")
     }
 
     val needToShowDeleteAll = ObservableField(false)
