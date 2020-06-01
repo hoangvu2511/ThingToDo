@@ -13,7 +13,8 @@ data class Task (
     val description: String? = "",
     val time: Long? = 0,
     val isFinished: Boolean = false,
-    val type: TypeTask? = null
+    val type: TypeTask? = null,
+    val uri: String? = null
 ) {
     @Ignore
     val isShowCheck = ObservableField(false)

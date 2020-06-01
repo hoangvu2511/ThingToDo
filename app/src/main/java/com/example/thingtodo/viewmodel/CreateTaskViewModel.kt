@@ -1,5 +1,6 @@
 package com.example.thingtodo.viewmodel
 
+import android.net.Uri
 import androidx.databinding.ObservableField
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
@@ -20,6 +21,8 @@ class CreateTaskViewModel(private val repository: TaskRepository) : ViewModel() 
 
     val calendar: CustomCalendar = CustomCalendar()
 
+    private val mutableSetUri = mutableSetOf<Uri>()
+
     init {
         calendar.setObserver(Observer {
             textTime.set(calendar.checkTime())
@@ -28,12 +31,17 @@ class CreateTaskViewModel(private val repository: TaskRepository) : ViewModel() 
 
     private var time: Long? = null
 
+    fun addUri(uri: Uri) {
+        mutableSetUri.add(uri)
+    }
+
     fun createTask(task: Task? = null) {
         val newTask = task ?: Task(
             title = titleTask.get(),
             description = descTask.get(),
             time = calendar.timeInMillis,
-            type = TypeTask.ALL
+            type = TypeTask.ALL,
+            uri = mutableSetUri.firstOrNull()?.toString()
         )
         repository.addTask(newTask)
         reset()
@@ -44,5 +52,6 @@ class CreateTaskViewModel(private val repository: TaskRepository) : ViewModel() 
         descTask.set("")
         time = null
         needNotification.set(false)
+        mutableSetUri.clear()
     }
 }

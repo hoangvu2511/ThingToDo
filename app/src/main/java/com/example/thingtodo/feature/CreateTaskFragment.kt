@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.databinding.DataBindingUtil
+import coil.api.load
 import com.example.thingtodo.R
 import com.example.thingtodo.databinding.FragmentCreateTaskBinding
 import com.example.thingtodo.ext.showDatePicker
@@ -20,6 +22,14 @@ class CreateTaskFragment : BottomSheetDialogFragment(), View.OnClickListener {
 
     private lateinit var binding: FragmentCreateTaskBinding
     private val createTaskViewModel: CreateTaskViewModel by viewModel()
+    private val getFile = registerForActivityResult(ActivityResultContracts.GetContent()) {
+        createTaskViewModel.addUri(it)
+        binding.ivFile.apply {
+            load(it)
+            visibility = View.VISIBLE
+        }
+        binding.tvAddFile.visibility = View.INVISIBLE
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,6 +49,9 @@ class CreateTaskFragment : BottomSheetDialogFragment(), View.OnClickListener {
             }
             R.id.item_priority -> {
             }
+            R.id.tvAddFile -> {
+                getFile.launch("*/*")
+            }
         }
     }
 
@@ -57,6 +70,7 @@ class CreateTaskFragment : BottomSheetDialogFragment(), View.OnClickListener {
 
         binding.itemDataTime.root.setOnClickListener(this)
         binding.itemPriority.setOnClickListener(this)
+        binding.tvAddFile.setOnClickListener(this)
     }
 
     private fun init() {
