@@ -3,7 +3,7 @@ package com.example.thingtodo.feature.task
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.paging.PagedListAdapter
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.thingtodo.R
@@ -11,8 +11,8 @@ import com.example.thingtodo.databinding.ItemTaskBinding
 import com.example.thingtodo.viewmodel.TaskViewModel
 import com.vunguyenhoang.core.model.Task
 
-class TaskAdapter(private val viewModel: TaskViewModel) :
-    PagedListAdapter<Task, RecyclerView.ViewHolder>(DIFF) {
+class TaskAdapter(private val viewModel: TaskViewModel? = null) :
+    PagingDataAdapter<Task, RecyclerView.ViewHolder>(DIFF) {
 
     companion object {
         val DIFF = object : DiffUtil.ItemCallback<Task>() {
@@ -46,25 +46,26 @@ class TaskAdapter(private val viewModel: TaskViewModel) :
             item?.let {
                 binding.item = item
                 binding.viewModel = viewModel
-                binding.root.setOnClickListener {
-                    if (item.isShowCheck.get() == true) {
-                        item.isCheck.set(!item.isCheck.get()!!)
-                    }
-                }
-                binding.root.setOnLongClickListener {
-                    // TODO: need to fix this feature
-                    //  flow: add new then long press -> bug show up
-                    if (item.isShowCheck.get() == true) {
-                        currentList?.forEach {
-                            it.isShowCheck.set(false)
-                            it.isCheck.set(false)
-                        }
-                    } else {
-                        currentList?.forEach { it.isShowCheck.set(true) }
-                    }
-                    viewModel.needToShowDeleteAll.set(item.isShowCheck.get())
-                    false
-                }
+                // TODO: because migrate paging to ver `3.0.0-alpha01` -> can not access list data
+//                binding.root.setOnClickListener {
+//                    if (item.isShowCheck.get() == true) {
+//                        item.isCheck.set(!item.isCheck.get()!!)
+//                    }
+//                }
+//                binding.root.setOnLongClickListener {
+//                    // TODO: need to fix this feature
+//                    //  flow: add new then long press -> bug show up
+//                    if (item.isShowCheck.get() == true) {
+//                        currentList?.forEach {
+//                            it.isShowCheck.set(false)
+//                            it.isCheck.set(false)
+//                        }
+//                    } else {
+//                        currentList?.forEach { it.isShowCheck.set(true) }
+//                    }
+//                    viewModel.needToShowDeleteAll.set(item.isShowCheck.get())
+//                    false
+//                }
             }
         }
     }

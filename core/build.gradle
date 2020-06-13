@@ -26,11 +26,15 @@ android {
         }
     }
 
-    dataBinding{
-        enabled = true
+    buildFeatures {
+        dataBinding = true
+
     }
 
-
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn"]
+    }
 }
 
 dependencies {
@@ -60,6 +64,6 @@ dependencies {
     kapt deps.room.compiler
     api deps.room.ktx
     api deps.room.runtime
-    api deps.room.common
+//    api deps.room.common
     api deps.room.migration
 }

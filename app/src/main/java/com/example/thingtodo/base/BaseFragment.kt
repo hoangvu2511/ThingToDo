@@ -11,12 +11,19 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.thingtodo.viewmodel.MainActivityViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import java.util.*
 
 abstract class BaseFragment<ViewBinding: ViewDataBinding> : Fragment() {
     abstract var layoutIdRes: Int
     protected lateinit var binding: ViewBinding
     protected lateinit var navController: NavController
     protected val mainActivityViewModel: MainActivityViewModel by sharedViewModel()
+    protected val today: Calendar = Calendar.getInstance().apply {
+        set(Calendar.HOUR_OF_DAY, 0)
+        set(Calendar.MINUTE, 0)
+        set(Calendar.SECOND, 0)
+        set(Calendar.MILLISECOND, 0)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

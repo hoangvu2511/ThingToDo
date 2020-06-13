@@ -15,8 +15,16 @@ class CustomCalendar : GregorianCalendar() {
         this.observerDateChane = observable
     }
 
+    init {
+        set(Calendar.HOUR_OF_DAY, 0)
+        set(Calendar.MINUTE, 0)
+        set(Calendar.SECOND, 0)
+        set(Calendar.MILLISECOND, 0)
+    }
+
     fun customSet(year: Int, month: Int, date: Int) {
-        set(year, month, date)
+        set(year, month, date, 0, 0, 0)
+        set(Calendar.MILLISECOND, 0)
         observerDateChane?.onChanged(DateChange(year, month, date))
     }
 

@@ -33,8 +33,8 @@ class MyTasksFragment : BaseFragment<FragmentMyTasksBinding>() {
     }
 
     override fun setUpViewModelOnce() {
-        taskViewModel.pagedList.observe(this, Observer {
-            adapter.submitList(it)
+        taskViewModel.pagedList.observe(this@MyTasksFragment, Observer {
+            adapter.submitData(lifecycle, it)
         })
     }
 

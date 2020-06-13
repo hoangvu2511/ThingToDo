@@ -1,7 +1,7 @@
 package com.vunguyenhoang.core.database.dao
 
 import androidx.lifecycle.LiveData
-import androidx.paging.DataSource
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -17,8 +17,14 @@ interface TaskDao {
     @Insert
     suspend fun addTask(task: Task): Long
 
+    @Query("select * from task WHERE time = :timeInMillis")
+    fun loadPagedTask(timeInMillis: Long): PagingSource<Int, Task>
+
     @Query("select * from task")
-    fun loadPagedTask(): DataSource.Factory<Int, Task>
+    fun loadPagedTask(): PagingSource<Int, Task>
+
+    @Query("select * from task")
+    fun loadTasks(): List<Task>
 
     @Delete
     suspend fun deleteTask(task: Task)

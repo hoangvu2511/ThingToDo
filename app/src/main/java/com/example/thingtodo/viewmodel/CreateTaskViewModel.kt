@@ -8,6 +8,7 @@ import com.example.thingtodo.ext.CustomCalendar
 import com.vunguyenhoang.core.model.Task
 import com.vunguyenhoang.core.model.TypeTask
 import com.vunguyenhoang.core.repository.TaskRepository
+import java.util.*
 
 class CreateTaskViewModel(private val repository: TaskRepository) : ViewModel() {
 
@@ -19,7 +20,11 @@ class CreateTaskViewModel(private val repository: TaskRepository) : ViewModel() 
 
     val textTime = ObservableField("Today")
 
-    val calendar: CustomCalendar = CustomCalendar()
+    val calendar: CustomCalendar = CustomCalendar().apply {
+        set(Calendar.HOUR_OF_DAY, 0)
+        set(Calendar.MINUTE, 0)
+        set(Calendar.MILLISECOND, 0)
+    }
 
     private val mutableSetUri = mutableSetOf<Uri>()
 

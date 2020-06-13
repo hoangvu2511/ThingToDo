@@ -26,4 +26,10 @@ class MainActivityViewModel: ViewModel() {
         }
         header.set(name)
     }
+
+    fun toMonth(calendar: Calendar) {
+        val formatter = SimpleDateFormat("MMMM yyyy", Locale.getDefault())
+        val newMonth = formatter.format(calendar.time)
+        updateHeader(newMonth)
+    }
 }

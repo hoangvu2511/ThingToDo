@@ -1,10 +1,7 @@
 package com.example.thingtodo
 
 import com.example.thingtodo.feature.CreateTaskFragment
-import com.example.thingtodo.viewmodel.CreateTaskViewModel
-import com.example.thingtodo.viewmodel.MainActivityViewModel
-import com.example.thingtodo.viewmodel.TaskTypeViewModel
-import com.example.thingtodo.viewmodel.TaskViewModel
+import com.example.thingtodo.viewmodel.*
 import com.vunguyenhoang.core.database.TodoDb
 import com.vunguyenhoang.core.repository.TaskRepository
 import com.vunguyenhoang.core.repository.TaskRepositoryIml
@@ -28,6 +25,7 @@ val dbModule = module {
     viewModel { TaskViewModel(get()) }
     viewModel { TaskTypeViewModel(get()) }
     viewModel { CreateTaskViewModel(get()) }
+    viewModel { CalendarViewModel(get()) }
 
     single { MainActivityViewModel() }
 }
