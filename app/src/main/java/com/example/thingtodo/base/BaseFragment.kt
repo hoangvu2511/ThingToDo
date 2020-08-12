@@ -1,6 +1,7 @@
 package com.example.thingtodo.base
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,4 +57,8 @@ abstract class BaseFragment<ViewBinding: ViewDataBinding> : Fragment() {
     open fun setUpViewModel() {}
 
     open fun setUpViewModelOnce() {}
+
+    protected fun logName(name: String) {
+        Log.d("abcd", name)
+    }
 }

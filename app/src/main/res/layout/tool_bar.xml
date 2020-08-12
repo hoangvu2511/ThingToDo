@@ -3,9 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+         <import type="kotlin.jvm.functions.Function1"/>
+        <import type="kotlin.Unit"/>
+        <import type="android.view.View" />
+
         <variable
             name="mainViewModel"
             type="com.example.thingtodo.viewmodel.MainActivityViewModel" />
+
+        <variable
+            name="onClick"
+            type="Function1&lt;View,Unit>" />
     </data>
 
     <com.google.android.material.appbar.AppBarLayout
@@ -22,6 +30,15 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="@{mainViewModel.isShowBack() == true ? View.VISIBLE : View.GONE}"
+                    android:src="@drawable/ic_baseline_arrow_back_ios"
+                    android:onClick="@{(v) -> onClick.invoke(v)}"
+                    />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     style="@style/normalText.header"

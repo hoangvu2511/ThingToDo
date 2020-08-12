@@ -61,6 +61,9 @@ class MainActivity : AppCompatActivity() {
             R.id.delete_tasks -> {
                 taskViewModel.deleteListTask()
             }
+            R.id.imgBack -> {
+                onBackPressed()
+            }
         }
     }
 }

@@ -9,12 +9,13 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class MainActivityViewModel: ViewModel() {
+class MainActivityViewModel : ViewModel() {
 
     val header = ObservableField("")
+    val isShowBack = ObservableField(false)
 
-    fun updateHeader(fragmentName: String){
-        val name = when(fragmentName){
+    fun updateHeader(fragmentName: String) {
+        val name = when (fragmentName) {
             TasksFragment::class.qualifiedName -> "My Lists"
             CalendarFragment::class.qualifiedName -> {
                 val data = Calendar.getInstance().time
@@ -24,6 +25,13 @@ class MainActivityViewModel: ViewModel() {
             SettingsFragment::class.qualifiedName -> "Settings"
             else -> fragmentName
         }
+        isShowBack.set(
+            arrayOf(
+                TasksFragment::class.qualifiedName,
+                CalendarFragment::class.qualifiedName,
+                SettingsFragment::class.qualifiedName
+            ).indexOf(fragmentName) == -1
+        )
         header.set(name)
     }
 
