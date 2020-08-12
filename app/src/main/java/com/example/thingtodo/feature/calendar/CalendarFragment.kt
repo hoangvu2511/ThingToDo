@@ -1,6 +1,5 @@
 package com.example.thingtodo.feature.calendar
 
-import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.example.thingtodo.R
 import com.example.thingtodo.base.BaseFragment
@@ -17,16 +16,17 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>() {
     override var layoutIdRes: Int = R.layout.fragment_calendar
 
     private val calendarViewModel by viewModel<CalendarViewModel>()
-    private val adpater = TaskAdapter()
+    private val adapter = TaskAdapter()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onStart() {
+        super.onStart()
         calendarViewModel.getItems(today.timeInMillis)
     }
 
-    override fun setUpViewModel() {
-        calendarViewModel.pagedList.observe(viewLifecycleOwner, Observer {
-            adpater.submitData(lifecycle, it)
+    override fun setUpViewModelOnce() {
+        //TODO: this commit just fix temporarily - wait for real solution =))
+        calendarViewModel.pagedList.observe(this, Observer {
+            adapter.submitData(lifecycle, it)
         })
     }
 
@@ -51,7 +51,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>() {
             }
         }
 
-        binding.rvTasks.adapter = adpater
+        binding.rvTasks.adapter = adapter
 
     }
 
