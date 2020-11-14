@@ -247,10 +247,10 @@ fun NavController.navigateWithAnim(@IdRes resId: Int, bundle: Bundle? = null) {
         resId,
         bundle,
         NavOptions.Builder().apply {
-            setEnterAnim(R.anim.nav_default_enter_anim)
-            setExitAnim(R.anim.nav_default_exit_anim)
-            setPopEnterAnim(R.anim.nav_default_pop_enter_anim)
-            setPopExitAnim(R.anim.nav_default_pop_exit_anim)
+            setEnterAnim(R.anim.slide_in_left)
+            setExitAnim(R.anim.slide_out_right)
+            setPopEnterAnim(R.anim.slide_in_right)
+            setPopExitAnim(R.anim.slide_out_left)
         }.build()
     )
 }
