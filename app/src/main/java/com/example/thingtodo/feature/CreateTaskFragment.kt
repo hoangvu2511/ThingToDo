@@ -23,12 +23,14 @@ class CreateTaskFragment : BottomSheetDialogFragment(), View.OnClickListener {
     private lateinit var binding: FragmentCreateTaskBinding
     private val createTaskViewModel: CreateTaskViewModel by viewModel()
     private val getFile = registerForActivityResult(ActivityResultContracts.GetContent()) {
-        createTaskViewModel.addUri(it)
-        binding.ivFile.apply {
-            load(it)
-            visibility = View.VISIBLE
+        it?.let {
+            createTaskViewModel.addUri(it)
+            binding.ivFile.apply {
+                load(it)
+                visibility = View.VISIBLE
+            }
+            binding.tvAddFile.visibility = View.INVISIBLE
         }
-        binding.tvAddFile.visibility = View.INVISIBLE
     }
 
     override fun onCreateView(
@@ -68,12 +70,13 @@ class CreateTaskFragment : BottomSheetDialogFragment(), View.OnClickListener {
             root.parent.requestLayout()
         }
 
-        binding.itemDataTime.root.setOnClickListener(this)
-        binding.itemPriority.setOnClickListener(this)
-        binding.tvAddFile.setOnClickListener(this)
+//        binding.itemDataTime.root.setOnClickListener(this)
+//        binding.itemPriority.setOnClickListener(this)
+//        binding.tvAddFile.setOnClickListener(this)
     }
 
     private fun init() {
         binding.viewModel = createTaskViewModel
+        binding.fragment = this
     }
 }
