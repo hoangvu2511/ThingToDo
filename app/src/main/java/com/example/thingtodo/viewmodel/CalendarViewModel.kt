@@ -1,23 +1,25 @@
 package com.example.thingtodo.viewmodel
 
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import androidx.paging.PagingData
-import com.vunguyenhoang.core.model.Task
+import androidx.lifecycle.*
+import androidx.paging.cachedIn
 import com.vunguyenhoang.core.repository.TaskRepository
-import kotlinx.coroutines.launch
+import java.util.*
 
 class CalendarViewModel(private val repository: TaskRepository) : ViewModel() {
 
-    val pagedList = MediatorLiveData<PagingData<Task>>()
+    private val _dateSelected = MutableLiveData(Calendar.getInstance().time)
 
-    fun getItems(timeInMillis: Long) {
-        viewModelScope.launch {
-            pagedList.addSource(repository.loadPagedListFilter(timeInMillis)) {
-                pagedList.value = it
-            }
+    val dateSelected: Calendar
+        get() = Calendar.getInstance().apply {
+            time = _dateSelected.value!!
         }
+
+    val pagedList = Transformations.switchMap(_dateSelected) {
+        repository.loadPagedListFilter(it.time).cachedIn(viewModelScope).asLiveData()
+    }
+
+    fun setDateSelected(date: Date) {
+        _dateSelected.value = date
     }
 
 }

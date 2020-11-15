@@ -69,10 +69,6 @@ class CreateTaskFragment : BottomSheetDialogFragment(), View.OnClickListener {
             bottomSheetBehavior.peekHeight = root.height
             root.parent.requestLayout()
         }
-
-//        binding.itemDataTime.root.setOnClickListener(this)
-//        binding.itemPriority.setOnClickListener(this)
-//        binding.tvAddFile.setOnClickListener(this)
     }
 
     private fun init() {

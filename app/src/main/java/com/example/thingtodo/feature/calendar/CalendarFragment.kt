@@ -16,15 +16,14 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>() {
     override var layoutIdRes: Int = R.layout.fragment_calendar
 
     private val calendarViewModel by viewModel<CalendarViewModel>()
-    private val adapter = TaskAdapter()
+    private lateinit var adapter: TaskAdapter
 
     override fun onStart() {
         super.onStart()
-        calendarViewModel.getItems(today.timeInMillis)
+        calendarViewModel.setDateSelected(today.time)
     }
 
-    override fun setUpViewModelOnce() {
-        //TODO: this commit just fix temporarily - wait for real solution =))
+    override fun setUpViewModel() {
         calendarViewModel.pagedList.observe(this, Observer {
             adapter.submitData(lifecycle, it)
         })
@@ -42,17 +41,18 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>() {
             .configure()
             .showTopText(false)
             .end()
+            .defaultSelectedDate(calendarViewModel.dateSelected)
             .build()
 
         horizontalCalendar.calendarListener = object : HorizontalCalendarListener() {
             override fun onDateSelected(date: Calendar?, position: Int) {
                 mainActivityViewModel.toMonth(date ?: return)
-                calendarViewModel.getItems(date.timeInMillis)
+                calendarViewModel.setDateSelected(date = date.time)
             }
         }
 
+        adapter = TaskAdapter()
         binding.rvTasks.adapter = adapter
-
     }
 
 }

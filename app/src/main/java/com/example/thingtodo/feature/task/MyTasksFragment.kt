@@ -8,13 +8,13 @@ import com.example.thingtodo.databinding.FragmentMyTasksBinding
 import com.example.thingtodo.ext.KEY_ARGUMENT
 import com.example.thingtodo.viewmodel.TaskViewModel
 import com.vunguyenhoang.core.model.TypeTask
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MyTasksFragment : BaseFragment<FragmentMyTasksBinding>() {
 
     override var layoutIdRes: Int = R.layout.fragment_my_tasks
     private var type: TypeTask? = null
-    private val taskViewModel: TaskViewModel by sharedViewModel()
+    private val taskViewModel: TaskViewModel by viewModel()
     private lateinit var adapter: TaskAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {

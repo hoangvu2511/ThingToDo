@@ -3,8 +3,10 @@ package com.example.thingtodo.viewmodel
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.vunguyenhoang.core.model.Task
 import com.vunguyenhoang.core.repository.TaskRepository
 import kotlinx.coroutines.launch
@@ -15,7 +17,8 @@ class TaskViewModel(private val repo: TaskRepository) : ViewModel() {
 
     fun loadPagedList() {
         viewModelScope.launch {
-            pagedList.addSource(repo.loadPagedList()) {
+            val source = repo.loadPagedList().cachedIn(viewModelScope).asLiveData()
+            pagedList.addSource(source) {
                 pagedList.value = it
             }
         }
