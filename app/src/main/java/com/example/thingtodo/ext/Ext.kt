@@ -2,6 +2,9 @@ package com.example.thingtodo.ext
 
 import android.app.DatePickerDialog
 import android.content.Context
+import android.widget.ImageView
+import androidx.databinding.BindingAdapter
+import coil.api.load
 import java.util.*
 
 fun Long?.toDate() =
@@ -15,7 +18,7 @@ fun Long?.toDate() =
 fun Context.showDatePicker(calendar: Calendar, isMinDate: Boolean = true) =
     DatePickerDialog(
         this,
-        DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+        { _, year, month, dayOfMonth ->
             when (calendar) {
                 is CustomCalendar -> calendar.customSet(year, month, dayOfMonth)
                 else -> calendar.set(year, month, dayOfMonth)
@@ -30,3 +33,8 @@ fun Context.showDatePicker(calendar: Calendar, isMinDate: Boolean = true) =
         }
         show()
     }
+
+@BindingAdapter("app:url", requireAll = false)
+fun loadingImageView(v: ImageView, url: String?) {
+    v.load(url)
+}

@@ -19,8 +19,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/mainColor"
         android:layout_marginBottom="@dimen/margin_8dp"
+        android:background="@color/mainColor"
         android:padding="@dimen/margin_8dp">
 
         <androidx.appcompat.widget.AppCompatCheckBox
@@ -55,6 +55,14 @@
             android:text="@string/delete"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/titleTask" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/descTask"
+            app:layout_constraintTop_toBottomOf="@id/descTask"
+            app:url="@{item.uri}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
